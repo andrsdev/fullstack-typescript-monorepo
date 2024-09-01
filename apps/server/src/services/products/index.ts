@@ -2,7 +2,7 @@
 import { prisma } from '../../lib/prisma-client';
 
 export class ProductsService {
-  async getProducts() {
+  async list() {
     const products = await prisma.product.findMany({
       include: {
         options: {
