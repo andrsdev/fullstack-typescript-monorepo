@@ -1,9 +1,21 @@
-// import { Prisma } from '@repo/db'
+import { Collection } from '@repo/schemas';
 import { prisma } from '../../lib/prisma-client';
 
 export class CollectionsService {
-  async list() {
-    const result = await prisma.collection.findMany();
-    return result;
+  async list(): Promise<Collection[]> {
+    const result = await prisma.collection.findMany({
+      include: {
+        _count: {
+          select: { products: true },
+        },
+      },
+    });
+
+    return result.map((item) => ({
+      id: item.id,
+      name: item.name,
+      description: item.description,
+      items: item._count.products,
+    }));
   }
 }

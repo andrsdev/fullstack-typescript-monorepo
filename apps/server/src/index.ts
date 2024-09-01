@@ -6,6 +6,7 @@ import { config } from './config';
 import { healthRoute } from './routes/health';
 import { staticRoute } from './routes/static';
 import { errorHandler } from './middlewares/error-handler';
+import { collectionsRoute } from './routes/collections';
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(cors());
 staticRoute(app);
 healthRoute(app);
 productsRoute(app);
+collectionsRoute(app);
 
 app.use(errorHandler);
 

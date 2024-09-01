@@ -1,22 +1,28 @@
 // import { Prisma } from '@repo/db'
+import { Product } from '@repo/schemas';
 import { prisma } from '../../lib/prisma-client';
 
 export class ProductsService {
-  async list() {
-    const products = await prisma.product.findMany({
+  async list(): Promise<Product[]> {
+    const result = await prisma.product.findMany({
       include: {
-        options: {
-          include: {
-            values: true,
-          },
-        },
         variants: {
-          include: {
-            optionValues: true,
+          select: {
+            price: true,
+          },
+          orderBy: {
+            price: 'asc',
           },
         },
       },
     });
-    return products;
+
+    return result.map((item) => ({
+      id: item.id,
+      name: item.name,
+      description: item.description,
+      image: item.image,
+      price: item.variants[0].price,
+    }));
   }
 }
