@@ -1,43 +1,27 @@
-import { PrismaClient, Prisma } from '@repo/db'
+import bodyParser from 'body-parser';
+import express from 'express';
+import cors from 'cors';
+import { productsRoute } from './routes/products';
+import { config } from './config';
+import { healthRoute } from './routes/health';
+import { staticRoute } from './routes/static';
+import { errorHandler } from './middlewares/error-handler';
 
-const prisma = new PrismaClient()
-import bodyParser from 'body-parser'
-import express from 'express'
-import cors from 'cors'
+const app = express();
 
-const app = express()
+// Parsers
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(cors());
 
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
-app.use(cors())
+// Routes
+staticRoute(app);
+healthRoute(app);
+productsRoute(app);
 
-app.get('/', async (_, res) => {
-  return res.json({ ok: true })
-})
+app.use(errorHandler);
 
-app.get('/users', async (_, res) => {
-  const users = await prisma.user.findMany()
-  return res.json({ users })
-})
-
-app.post('/users', async (req, res) => {
-  const data = req.body
-
-  try {
-    await prisma.user.create({ data })
-    return res.json({ message: 'User Created' })
-  } catch (e) {
-    if (e instanceof Prisma.PrismaClientKnownRequestError) {
-      console.log('Message')
-      console.log(e.meta)
-    }
-
-    return res.json({ message: 'User not created' })
-  }
-})
-
-const port = process.env.PORT || 5001
-
-app.listen(port, () => {
-  console.log(`Server API running on http://localhost:${port}`)
-})
+// Listener
+app.listen(config.port, () => {
+  console.log(` Server API listening on http://localhost:${config.port}`);
+});
