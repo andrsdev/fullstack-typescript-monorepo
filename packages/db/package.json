@@ -8,7 +8,7 @@
     "db:seed": "tsx ./src/seed.ts",
     "db:generate": "prisma generate",
     "db:migrate": "prisma db push --skip-generate",
-    "build": "tsc"
+    "build": "tsc && tsc-alias"
   },
   "dependencies": {
     "@prisma/client": "5.18.0"
@@ -18,10 +18,12 @@
     "@repo/typescript-config": "workspace:*",
     "@faker-js/faker": "^8.4.1",
     "@types/node": "^22.5.1",
+    "tsc-alias": "^1.8.10",
     "tsx": "^4.17.0",
     "prisma": "5.18.0"
   },
   "exports": {
+    "types": "./src/index.ts",
     "default": "./dist/index.js"
   }
 }
