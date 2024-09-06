@@ -17,20 +17,11 @@ export const Route = createFileRoute('/search')({
     collection,
     sort,
   }),
-  loader: ({ context, deps }) => {
-    console.time('loader');
-    const result = {
-      products: context.queryClient.ensureQueryData(productsQueryOptions(deps)),
-      collections: context.queryClient.ensureQueryData(
-        collectionsQueryOptions(),
-      ),
-    };
-
-    console.timeEnd('loader');
-
-    return result;
-  },
-  // pendingMinMs: 0,
+  loader: ({ context, deps }) => ({
+    products: context.queryClient.ensureQueryData(productsQueryOptions(deps)),
+    collections: context.queryClient.ensureQueryData(collectionsQueryOptions()),
+  }),
+  pendingMinMs: 0,
 });
 
 function SearchPage() {
