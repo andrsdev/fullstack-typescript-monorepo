@@ -1,6 +1,6 @@
-export type ErrorResponse<T> = {
+export type ErrorResponse = {
   status: 'error';
-  error: T;
+  error: Error;
 };
 
 export type SuccessResponse<T> = {
@@ -8,4 +8,4 @@ export type SuccessResponse<T> = {
   data: T;
 };
 
-export type GenericResponse<T> = SuccessResponse<T> | ErrorResponse<T>;
+export type GenericResponse<T> = SuccessResponse<T> | ErrorResponse;
