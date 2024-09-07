@@ -27,7 +27,7 @@ export const Route = createFileRoute('/search')({
 function SearchPage() {
   return (
     <div className="flex justify-center container mx-auto gap-12 py-12">
-      <aside className="flex flex-col gap-6">
+      <aside className="flex flex-col gap-6 w-full max-w-[200px]">
         <Collections />
         <Sort />
       </aside>
