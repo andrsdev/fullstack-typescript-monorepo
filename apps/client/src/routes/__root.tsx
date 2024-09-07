@@ -12,7 +12,7 @@ type RootContext = {
 export const Route = createRootRouteWithContext<RootContext>()({
   component: () => (
     <>
-      <div className="p-2 flex gap-2 container mx-auto">
+      <div className="py-3 flex gap-8 container mx-auto justify-end">
         <Link to="/" className="[&.active]:font-bold">
           Home
         </Link>{' '}
