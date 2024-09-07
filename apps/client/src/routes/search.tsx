@@ -3,16 +3,14 @@ import { ProductsList } from '../components/ProductsList';
 import { useSuspenseQuery } from '@tanstack/react-query';
 
 import { FilterOption } from '../components/FilterOption';
-import {
-  productSearchSchema,
-  productsQueryOptions,
-} from '../utils/productsQueryOptions';
+import { productsQueryOptions } from '../utils/productsQueryOptions';
 import { collectionsQueryOptions } from '../utils/collectionsQuery';
 import { Suspense } from 'react';
+import { ProductsQuerySchema } from '@repo/schemas';
 
 export const Route = createFileRoute('/search')({
   component: SearchPage,
-  validateSearch: productSearchSchema,
+  validateSearch: ProductsQuerySchema,
   loaderDeps: ({ search: { collection, sort } }) => ({
     collection,
     sort,
@@ -26,7 +24,7 @@ export const Route = createFileRoute('/search')({
 
 function SearchPage() {
   return (
-    <div className="flex justify-center max-w-screen-2xl mx-auto gap-12 p-12">
+    <div className="flex justify-center container mx-auto gap-12 py-12">
       <aside className="flex flex-col gap-6">
         <Collections />
         <Sort />
@@ -49,7 +47,7 @@ function Collections() {
 
   return (
     <nav>
-      <h3 className="text-xs px-3 w-full text-gray-500">Collections</h3>
+      <h3 className="text-xs px-3 w-full text-slate-500">Collections</h3>
       <ul>
         <li>
           <FilterOption filterKey="collection" name="All" value={undefined} />
@@ -71,7 +69,7 @@ function Collections() {
 function Sort() {
   return (
     <nav>
-      <h3 className="text-xs px-3 w-full text-gray-500">Sort</h3>
+      <h3 className="text-xs px-3 w-full text-slate-500">Sort</h3>
       <ul>
         <li>
           <FilterOption

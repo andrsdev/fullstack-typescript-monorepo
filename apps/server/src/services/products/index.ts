@@ -1,28 +1,46 @@
-// import { Prisma } from '@repo/db'
-import { Product } from '@repo/schemas';
+import { Product, ProductsQuery } from '@repo/schemas';
 import { prisma } from '../../lib/prisma-client';
+import type { Prisma } from '@repo/db';
 
 export class ProductsService {
-  async list(): Promise<Product[]> {
+  async list({ collection, sort }: ProductsQuery): Promise<Product[]> {
+    const where: Prisma.ProductFindManyArgs['where'] = {};
+
+    if (collection) {
+      where.collections = {
+        some: {
+          id: collection,
+        },
+      };
+    }
+
     const result = await prisma.product.findMany({
+      where,
       include: {
         variants: {
-          select: {
-            price: true,
-          },
-          orderBy: {
-            price: 'asc',
-          },
+          take: 1,
+          select: { price: true },
+          orderBy: { price: 'asc' },
         },
       },
     });
 
-    return result.map((item) => ({
+    const items = result.map((item) => ({
       id: item.id,
       name: item.name,
       description: item.description,
       image: item.image,
       price: item.variants[0].price,
     }));
+
+    if (sort === 'price-asc') {
+      items.sort((a, b) => a.price - b.price);
+    }
+
+    if (sort === 'price-desc') {
+      items.sort((a, b) => b.price - a.price);
+    }
+
+    return items;
   }
 }

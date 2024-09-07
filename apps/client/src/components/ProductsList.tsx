@@ -13,7 +13,7 @@ export const ProductsList = () => {
   }
 
   return (
-    <div className="grid gap-4 grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))]">
+    <div className="grid gap-4 grid-cols-[repeat(auto-fill,_minmax(250px,1fr))]">
       {data.data.map((item) => (
         <ProductCard key={item.id} product={item} />
       ))}

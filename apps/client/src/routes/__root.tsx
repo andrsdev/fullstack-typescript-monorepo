@@ -12,12 +12,12 @@ type RootContext = {
 export const Route = createRootRouteWithContext<RootContext>()({
   component: () => (
     <>
-      <div className="p-2 flex gap-2">
+      <div className="p-2 flex gap-2 container mx-auto">
         <Link to="/" className="[&.active]:font-bold">
           Home
         </Link>{' '}
-        <Link to="/about" className="[&.active]:font-bold">
-          About
+        <Link to="/search" className="[&.active]:font-bold">
+          Search
         </Link>
       </div>
       <hr />

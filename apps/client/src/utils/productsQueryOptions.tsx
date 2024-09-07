@@ -1,23 +1,16 @@
-import { ListProductsResponse } from '@repo/schemas';
+import { ListProductsResponse, ProductsQuery } from '@repo/schemas';
 import { queryOptions } from '@tanstack/react-query';
-import { z } from 'zod';
 
-export const productSearchSchema = z.object({
-  collection: z.number().optional(),
-  sort: z.string().optional(),
-});
-
-export type ProductSearch = z.infer<typeof productSearchSchema>;
-
-export const productsQueryOptions = ({ collection }: ProductSearch) => {
+export const productsQueryOptions = ({ collection, sort }: ProductsQuery) => {
   const searchParams = new URLSearchParams({
     collection: collection?.toString() ?? '',
+    sort: sort ?? '',
   });
 
   const url = `http://localhost:5001/api/products?${searchParams.toString()}`;
 
   return queryOptions<ListProductsResponse>({
-    queryKey: ['productsSearch', collection],
+    queryKey: ['productsSearch', collection, sort],
     queryFn: () => fetch(url).then((result) => result.json()),
   });
 };

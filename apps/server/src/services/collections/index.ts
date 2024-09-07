@@ -4,6 +4,11 @@ import { prisma } from '../../lib/prisma-client';
 export class CollectionsService {
   async list(): Promise<Collection[]> {
     const result = await prisma.collection.findMany({
+      where: {
+        products: {
+          some: {},
+        },
+      },
       include: {
         _count: {
           select: { products: true },
