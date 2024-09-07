@@ -3,7 +3,7 @@ import { prisma } from '../../lib/prisma-client';
 import type { Prisma } from '@repo/db';
 
 export class ProductsService {
-  async list({ collection, sort }: ProductsQuery): Promise<Product[]> {
+  async list({ collection, sort, q }: ProductsQuery): Promise<Product[]> {
     const where: Prisma.ProductFindManyArgs['where'] = {};
 
     if (collection) {
@@ -11,6 +11,12 @@ export class ProductsService {
         some: {
           id: collection,
         },
+      };
+    }
+
+    if (q) {
+      where.name = {
+        search: `'${q.replace(/[^a-zA-Z0-9\s]/g, '')}'`,
       };
     }
 

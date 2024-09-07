@@ -8,6 +8,8 @@ import { collectionsQueryOptions } from '../utils/collectionsQuery';
 import { Suspense } from 'react';
 import { ProductsQuerySchema } from '@repo/schemas';
 
+import { SearchInput } from '../components/SearchInput';
+
 export const Route = createFileRoute('/search')({
   component: SearchPage,
   validateSearch: ProductsQuerySchema,
@@ -30,6 +32,9 @@ function SearchPage() {
         <Sort />
       </aside>
       <main className="flex-1">
+        <div className="flex justify-end mb-4">
+          <SearchInput />
+        </div>
         <Suspense fallback="Loading...">
           <ProductsList />
         </Suspense>
