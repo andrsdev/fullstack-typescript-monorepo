@@ -5,4 +5,6 @@ export function formatPrice(value: number) {
   });
 
   return formatter.format(value / 100);
+
+  // return `$${(value / 100).toFixed(2)}`;
 }
