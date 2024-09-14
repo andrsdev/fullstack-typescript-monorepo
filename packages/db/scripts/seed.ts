@@ -1,9 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { faker } from '@faker-js/faker';
 
-const prisma = new PrismaClient();
-
-async function main() {
+export async function seed(prisma: PrismaClient) {
   // Seed Products with Variants and Options
   for (let i = 0; i < 5; i++) {
     const product = await prisma.product.create({
@@ -138,12 +136,3 @@ async function main() {
     });
   }
 }
-
-main()
-  .then(async () => {
-    await prisma.$disconnect();
-  })
-  .catch(async (e) => {
-    console.error(e);
-    await prisma.$disconnect();
-  });

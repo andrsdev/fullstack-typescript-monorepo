@@ -141,6 +141,9 @@ importers:
       '@playwright/test':
         specifier: ^1.47.1
         version: 1.47.1
+      '@repo/db':
+        specifier: workspace:*
+        version: link:../../packages/db
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../../packages/config-eslint

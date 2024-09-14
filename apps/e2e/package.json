@@ -2,7 +2,7 @@
   "name": "e2e",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
     "e2e": "playwright test"
   },
@@ -12,6 +12,7 @@
   "devDependencies": {
     "client": "workspace:*",
     "server": "workspace:*",
+    "@repo/db": "workspace:*",
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@playwright/test": "^1.47.1",
