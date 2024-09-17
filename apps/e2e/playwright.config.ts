@@ -36,7 +36,14 @@ export default defineConfig({
     {
       name: 'setup',
       testMatch: /global\.setup\.ts/,
+      teardown: 'cleanup',
     },
+
+    {
+      name: 'cleanup',
+      testMatch: /global\.cleanup\.ts/,
+    },
+
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
@@ -75,10 +82,11 @@ export default defineConfig({
   ],
 
   /* Run your local dev server before starting the tests */
-  webServer: {
-    command: 'pnpm exec turbo start',
-    url: 'http://localhost:4173',
-    cwd: '../../',
-    reuseExistingServer: true,
-  },
+  // webServer: {
+  //   command: 'pnpm exec turbo start',
+  //   url: 'http://localhost:4173',
+  //   cwd: '../../',
+  //   reuseExistingServer: true,
+  //   stdout: 'pipe',
+  // },
 });

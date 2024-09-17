@@ -6,7 +6,7 @@ export async function seed(prisma: PrismaClient) {
   for (let i = 0; i < 5; i++) {
     const product = await prisma.product.create({
       data: {
-        name: faker.commerce.productName(),
+        name: `Product ${i}`,
         description: faker.commerce.productDescription(),
         image: faker.image.url(),
         options: {

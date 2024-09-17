@@ -10,6 +10,9 @@
     "db:seed": {
       "cache": false
     },
+    "db:cleanup": {
+      "cache": false
+    },
     "db:generate": {
       "cache": false
     },
@@ -35,8 +38,9 @@
       "persistent": true
     },
     "test": {},
-    "e2e": {
-      "dependsOn": ["^build"]
-    }
+    "e2e:run": {
+      "cache": false
+    },
+    "e2e:report": {}
   }
 }

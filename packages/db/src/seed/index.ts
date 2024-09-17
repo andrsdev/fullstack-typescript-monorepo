@@ -1,5 +1,5 @@
-import { PrismaClient } from '../src/index';
-import { seed } from './seed';
+import { PrismaClient } from '../index';
+import { seed } from '../../scripts/seed';
 
 const prisma = new PrismaClient();
 
