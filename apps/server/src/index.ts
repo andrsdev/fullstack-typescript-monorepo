@@ -25,5 +25,5 @@ app.use(errorHandler);
 
 // Listener
 app.listen(config.port, () => {
-  console.log(` Server API listening on http://localhost:${config.port}`);
+  console.log(`Server API listening on http://localhost:${config.port}`);
 });
