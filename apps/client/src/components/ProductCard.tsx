@@ -9,6 +9,7 @@ type ProductCardProps = {
 export function ProductCard({ product }: ProductCardProps) {
   return (
     <Link
+      to={`/product/${product.id}`}
       key={product.id}
       className="group border border-slate-200 rounded-xl overflow-hidden hover:border-slate-500 transition-all bg-slate-50 p-3 pb-6"
     >

@@ -1,4 +1,4 @@
-import { Product, ProductsQuery } from '@repo/schemas';
+import { Product, ProductQuery, ProductsQuery } from '@repo/schemas';
 import { prisma } from '../../lib/prisma-client';
 import type { Prisma } from '@repo/db';
 
@@ -48,5 +48,28 @@ export class ProductsService {
     }
 
     return items;
+  }
+
+  async get({ id }: ProductQuery): Promise<Product | null> {
+    const item = await prisma.product.findFirst({
+      where: { id },
+      include: {
+        variants: {
+          orderBy: { price: 'asc' },
+        },
+      },
+    });
+
+    if (!item) {
+      return null;
+    }
+
+    return {
+      id: item.id,
+      name: item.name,
+      description: item.description,
+      image: item.image,
+      price: item.variants[0].price,
+    };
   }
 }

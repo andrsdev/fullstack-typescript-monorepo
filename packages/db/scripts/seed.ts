@@ -119,8 +119,8 @@ export async function seed(prisma: PrismaClient) {
 
     // Seed Collections
     await prisma.collection.createMany({
-      data: Array.from({ length: 3 }).map(() => ({
-        name: faker.commerce.department(),
+      data: Array.from({ length: 3 }, (v, i) => i).map((v) => ({
+        name: `Collection ${v}`,
         description: faker.lorem.sentences(3),
       })),
     });

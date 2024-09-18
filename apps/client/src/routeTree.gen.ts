@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as SearchImport } from './routes/search'
 import { Route as IndexImport } from './routes/index'
+import { Route as ProductIdImport } from './routes/product.$id'
 
 // Create/Update Routes
 
@@ -23,6 +24,11 @@ const SearchRoute = SearchImport.update({
 
 const IndexRoute = IndexImport.update({
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ProductIdRoute = ProductIdImport.update({
+  path: '/product/$id',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -44,12 +50,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SearchImport
       parentRoute: typeof rootRoute
     }
+    '/product/$id': {
+      id: '/product/$id'
+      path: '/product/$id'
+      fullPath: '/product/$id'
+      preLoaderRoute: typeof ProductIdImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren({ IndexRoute, SearchRoute })
+export const routeTree = rootRoute.addChildren({
+  IndexRoute,
+  SearchRoute,
+  ProductIdRoute,
+})
 
 /* prettier-ignore-end */
 
@@ -60,7 +77,8 @@ export const routeTree = rootRoute.addChildren({ IndexRoute, SearchRoute })
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/search"
+        "/search",
+        "/product/$id"
       ]
     },
     "/": {
@@ -68,6 +86,9 @@ export const routeTree = rootRoute.addChildren({ IndexRoute, SearchRoute })
     },
     "/search": {
       "filePath": "search.tsx"
+    },
+    "/product/$id": {
+      "filePath": "product.$id.tsx"
     }
   }
 }
