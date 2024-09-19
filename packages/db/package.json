@@ -5,8 +5,8 @@
   "scripts": {
     "db:start": "docker compose up -d",
     "db:stop": "docker compose down",
-    "db:seed": "tsx ./src/seed/index.ts",
-    "db:cleanup": "tsx ./src/cleanup/index.ts",
+    "db:seed": "tsx ./scripts/seed/index.ts",
+    "db:cleanup": "tsx ./scripts/cleanup/index.ts",
     "db:generate": "prisma generate",
     "db:migrate": "prisma db push --skip-generate",
     "build": "tsc && tsc-alias"
@@ -21,14 +21,15 @@
     "@types/node": "^22.5.1",
     "tsc-alias": "^1.8.10",
     "tsx": "^4.17.0",
-    "prisma": "5.18.0"
+    "prisma": "5.18.0",
+    "typescript": "^5.3.3"
   },
   "exports": {
     ".": {
       "types": "./src/index.ts",
       "default": "./dist/index.js"
     },
-    "./seed": "./scripts/seed.ts",
-    "./cleanup": "./scripts/cleanup.ts"
+    "./seed": "./scripts/seed/seed.ts",
+    "./cleanup": "./scripts/cleanup/cleanup.ts"
   }
 }
