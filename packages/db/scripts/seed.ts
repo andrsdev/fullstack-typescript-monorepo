@@ -2,6 +2,14 @@ import { PrismaClient } from '@prisma/client';
 import { faker } from '@faker-js/faker';
 
 export async function seed(prisma: PrismaClient) {
+  // Seed Collections
+  await prisma.collection.createMany({
+    data: Array.from({ length: 3 }, (v, i) => i).map((v) => ({
+      name: `Collection ${v}`,
+      description: faker.lorem.sentences(3),
+    })),
+  });
+
   // Seed Products with Variants and Options
   for (let i = 0; i < 5; i++) {
     const product = await prisma.product.create({
@@ -117,17 +125,9 @@ export async function seed(prisma: PrismaClient) {
       });
     }
 
-    // Seed Collections
-    await prisma.collection.createMany({
-      data: Array.from({ length: 3 }, (v, i) => i).map((v) => ({
-        name: `Collection ${v}`,
-        description: faker.lorem.sentences(3),
-      })),
-    });
-
     // Randomly assign products to collections
     await prisma.collection.update({
-      where: { id: faker.number.int({ min: 1, max: 3 }) },
+      where: { id: (i % 3) + 1 },
       data: {
         products: {
           connect: { id: product.id },
