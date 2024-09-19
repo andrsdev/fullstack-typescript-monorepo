@@ -23,7 +23,7 @@ jobs:
         run: pnpm install
 
       - name: Install Playwright Browsers
-        run: pnpm exec playwright install --with-deps
+        run: pnpm dlx playwright install --with-deps
 
       - name: Run Project
         run: pnpm exec turbo start
