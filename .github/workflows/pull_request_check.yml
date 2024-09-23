@@ -7,8 +7,6 @@ jobs:
     timeout-minutes: 10
     runs-on: ubuntu-latest
     environment: LOCAL
-    env:
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
     steps:
       - uses: actions/checkout@v4
 
@@ -27,6 +25,9 @@ jobs:
 
       - name: Install Playwright Browsers
         run: pnpm dlx playwright install --with-deps
+
+      - name: Create DB .env file
+        run: echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" > ./packages/db/.env
 
       - name: Start DB
         run: |
