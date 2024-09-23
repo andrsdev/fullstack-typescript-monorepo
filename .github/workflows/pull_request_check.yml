@@ -28,6 +28,11 @@ jobs:
       - name: Install Playwright Browsers
         run: pnpm dlx playwright install --with-deps
 
+      - name: Start DB
+        run: |
+          pnpm exec turbo db:start
+          pnpm exec turbo db:migrate
+
       - name: Run Project
         run: pnpm exec turbo start
 
