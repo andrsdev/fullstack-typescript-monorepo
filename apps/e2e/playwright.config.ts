@@ -82,11 +82,11 @@ export default defineConfig({
   ],
 
   /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'pnpm exec turbo start',
-  //   url: 'http://localhost:4173',
-  //   cwd: '../../',
-  //   reuseExistingServer: true,
-  //   stdout: 'pipe',
-  // },
+  webServer: {
+    command: 'pnpm exec turbo start',
+    url: 'http://localhost:4173',
+    cwd: '../../',
+    reuseExistingServer: true,
+    stdout: 'pipe',
+  },
 });

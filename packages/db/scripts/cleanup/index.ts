@@ -1,10 +1,10 @@
-import { PrismaClient } from '../index';
-import { seed } from '../../scripts/seed';
+import { PrismaClient } from '@prisma/client';
+import { cleanup } from './cleanup';
 
 const prisma = new PrismaClient();
 
 async function main() {
-  await seed(prisma);
+  await cleanup(prisma);
 }
 
 main()
