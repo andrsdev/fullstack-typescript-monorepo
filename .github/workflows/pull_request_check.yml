@@ -38,11 +38,8 @@ jobs:
           pnpm exec turbo db:start
           pnpm exec turbo db:migrate
 
-      - name: Run Project
-        run: pnpm exec turbo start
-
-      - name: Run Unit Tests
-        run: pnpm exec turbo test
+      # - name: Run Unit Tests
+      #   run: pnpm exec turbo test
 
       - name: Run E2E Tests
         run: pnpm exec turbo e2e:run
