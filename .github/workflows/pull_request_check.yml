@@ -26,7 +26,7 @@ jobs:
       - name: Install Playwright Browsers
         run: pnpm dlx playwright install --with-deps
 
-      - name: Create Dabase .env file
+      - name: Create Database .env file
         run: |
           echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" > ./packages/db/.env
           echo "POSTGRES_DB=${{ secrets.POSTGRES_DB }}" >> ./packages/db/.env
@@ -38,8 +38,8 @@ jobs:
           pnpm exec turbo db:start
           pnpm exec turbo db:migrate
 
-      # - name: Run Unit Tests
-      #   run: pnpm exec turbo test
+      - name: Run Unit Tests
+        run: pnpm exec turbo test
 
       - name: Run E2E Tests
         run: pnpm exec turbo e2e:run
