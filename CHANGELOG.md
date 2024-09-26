@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/andrsdev/fullstack-typescript-monorepo/compare/v1.0.0...v1.1.0) (2024-09-26)
+
+
+### Features
+
+* created the auth module ([ababdb7](https://github.com/andrsdev/fullstack-typescript-monorepo/commit/ababdb74909101ccdd70a66aa91c878859aef5b5))
+
 ## 1.0.0 (2024-09-25)
 
 
